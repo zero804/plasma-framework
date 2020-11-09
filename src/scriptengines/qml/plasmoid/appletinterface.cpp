@@ -8,6 +8,7 @@
 #include "appletinterface.h"
 
 #include <QAction>
+#include <QActionGroup>
 #include <QDir>
 #include <QFile>
 #include <QIcon>
@@ -20,7 +21,6 @@
 #include <KConfigLoader>
 
 #include <Plasma/Plasma>
-#include <Plasma/Applet>
 #include <Plasma/Corona>
 #include <Plasma/Package>
 #include <Plasma/PluginLoader>
@@ -98,6 +98,8 @@ AppletInterface::AppletInterface(DeclarativeAppletScript *script, const QVariant
 
     connect(applet(), &Plasma::Applet::activated,
             this, &AppletInterface::activated);
+    connect(applet(), &Plasma::Applet::containmentDisplayHintsChanged,
+            this, &AppletInterface::containmentDisplayHintsChanged);
 
     connect(appletScript(), &DeclarativeAppletScript::formFactorChanged,
             this, &AppletInterface::formFactorChanged);
@@ -230,6 +232,11 @@ Plasma::Types::FormFactor AppletInterface::formFactor() const
 Plasma::Types::Location AppletInterface::location() const
 {
     return applet()->location();
+}
+
+Plasma::Types::ContainmentDisplayHints AppletInterface::containmentDisplayHints() const
+{
+    return applet()->containmentDisplayHints();
 }
 
 QString AppletInterface::currentActivity() const
@@ -419,6 +426,25 @@ QString AppletInterface::file(const QString &fileType, const QString &filePath)
     return appletScript()->filePath(fileType, filePath);
 }
 
+QList<QObject *> AppletInterface::contextualActionsObjects() const
+{
+    QList<QObject *> actions;
+    Plasma::Applet *a = applet();
+    if (a->failedToLaunch()) {
+        return actions;
+    }
+
+    for (const QString &name : qAsConst(m_actions)) {
+        QAction *action = a->actions()->action(name);
+
+        if (action) {
+            actions << action;
+        }
+    }
+
+    return actions;
+}
+
 QList<QAction *> AppletInterface::contextualActions() const
 {
     QList<QAction *> actions;
@@ -450,7 +476,24 @@ void AppletInterface::setActionSeparator(const QString &name)
         action->setSeparator(true);
         a->actions()->addAction(name, action);
         m_actions.append(name);
+        Q_EMIT contextualActionsChanged();
     }
+}
+
+void AppletInterface::setActionGroup(const QString &actionName, const QString &group)
+{
+    Plasma::Applet *a = applet();
+    QAction *action = a->actions()->action(actionName);
+
+    if (!action) {
+        return;
+    }
+
+    if (!m_actionGroups.contains(group)) {
+        m_actionGroups[group] = new QActionGroup(this);
+    }
+
+    action->setActionGroup(m_actionGroups[group]);
 }
 
 void AppletInterface::setAction(const QString &name, const QString &text, const QString &icon, const QString &shortcut)
@@ -466,6 +509,7 @@ void AppletInterface::setAction(const QString &name, const QString &text, const 
 
         Q_ASSERT(!m_actions.contains(name));
         m_actions.append(name);
+        Q_EMIT contextualActionsChanged();
 
         connect(action, &QAction::triggered, this, [this, name] {
             executeAction(name);

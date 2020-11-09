@@ -27,7 +27,6 @@
 #include <KDesktopFile>
 #include <QDebug>
 #include <KGlobalAccel>
-#include <KPluginInfo>
 #include <KLocalizedString>
 #include <KService>
 #include <KConfigLoader>
@@ -703,6 +702,13 @@ Types::FormFactor Applet::formFactor() const
     }
 
     return c ? c->d->formFactor : Plasma::Types::Planar;
+}
+
+Types::ContainmentDisplayHints Applet::containmentDisplayHints() const
+{
+    Containment *c = containment();
+
+    return c ? c->d->containmentDisplayHints : Plasma::Types::NoContainmentDisplayHint;
 }
 
 Containment *Applet::containment() const

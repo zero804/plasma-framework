@@ -8,9 +8,7 @@
 #include "private/appletquickitem_p.h"
 #include "debug_p.h"
 
-#include <QQmlComponent>
 #include <QQmlExpression>
-#include <QQmlEngine>
 #include <QQmlProperty>
 #include <QQmlContext>
 #include <QQuickWindow>
@@ -596,7 +594,7 @@ void AppletQuickItem::init()
             reason = d->applet->launchErrorMessage();
         } else if (d->applet->kPackage().isValid()) {
             const auto errors = d->qmlObject->mainComponent()->errors();
-            for (QQmlError error : errors) {
+            for (const QQmlError &error : errors) {
                 reason += error.toString() + QLatin1Char('\n');
             }
             reason = i18n("Error loading QML file: %1", reason);

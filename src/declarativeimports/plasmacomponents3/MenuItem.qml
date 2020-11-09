@@ -52,10 +52,6 @@ T.MenuItem {
             Layout.alignment: Qt.AlignVCenter
             visible: (controlRoot.ListView.view && controlRoot.ListView.view.hasIcons) || (controlRoot.icon != undefined && (controlRoot.icon.name.length > 0 || controlRoot.icon.source.length > 0))
             source: controlRoot.icon ? (controlRoot.icon.name || controlRoot.icon.source) : ""
-//FIXME: either migrate to Kirigami icon or add color to IconItem
-//            color: controlRoot.icon ? controlRoot.icon.color : "transparent"
-            //hovered is for retrocompatibility
-            status: (controlRoot.highlighted || controlRoot.hovered) ? PlasmaCore.Svg.Selected : PlasmaCore.Svg.Normal
             Layout.preferredHeight: Math.max(label.height, Kirigami.Units.iconSizes.small)
             Layout.preferredWidth: Layout.preferredHeight
         }
@@ -84,12 +80,25 @@ T.MenuItem {
 @DISABLE_UNDER_QQC2_2_3@        visible: controlRoot.subMenu
 @DISABLE_UNDER_QQC2_2_3@    }
 
-    indicator: CheckIndicator {
+    indicator: Loader {
         x: controlRoot.mirrored ? controlRoot.width - width - controlRoot.rightPadding : controlRoot.leftPadding
         y: controlRoot.topPadding + (controlRoot.availableHeight - height) / 2
 
         visible: controlRoot.checkable
-        control: controlRoot
+        sourceComponent: controlRoot.autoExclusive ? radioComponent : checkComponent
+    }
+    
+    Component {
+        id: radioComponent
+        RadioIndicator {
+            control: controlRoot
+        }
+    }
+    Component {
+        id: checkComponent
+        CheckIndicator {
+            control: controlRoot
+        }
     }
 
     background: Item {
