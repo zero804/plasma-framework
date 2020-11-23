@@ -11,16 +11,7 @@ if(KDE_PLATFORM_FEATURE_BINARY_COMPATIBLE_FEATURE_REDUCTION)
     set(PLASMA_NO_PACKAGE_EXTRADATA TRUE)
 endif()
 
-#find_package(KdepimLibs 4.5.60)
-#find_package(Gpgme)
-#set_package_properties(KDEPIMLIBS PROPERTIES DESCRIPTION "KDE PIM libraries"
-#                       URL "https://www.kde.org" TYPE OPTIONAL
-#                       PURPOSE "Needed for building several Plasma DataEngines")
-
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-plasma.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-plasma.h)
-
-#FIXME: gpgme++ is in kdepimlibs, must move somewhere else!
-include_directories(${KDEPIMLIBS_INCLUDE_DIRS} ${GPGME_INCLUDES})
 
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=1209)
 
@@ -75,14 +66,6 @@ endif()
 
 kconfig_add_kcfg_files(Plasma_LIB_SRCS data/kconfigxt/libplasma-theme-global.kcfgc)
 
-#NEPOMUK_GENERATE_FROM_ONTOLOGY(
-#   nwc.nrl
-#   ${metadata_test_BINARY_DIR}
-#   TEST_HEADERS
-#   TEST_SOURCES
-#   TEST_INCLUDES
-#)
-
 ecm_qt_declare_logging_category(Plasma_LIB_SRCS
     HEADER debug_p.h
     IDENTIFIER LOG_PLASMA
@@ -100,17 +83,13 @@ ecm_generate_export_header(KF5Plasma
     GROUP_BASE_NAME KF
     VERSION ${KF5_VERSION}
     DEPRECATED_BASE_VERSION 0
-    DEPRECATION_VERSIONS 5.6 5.19 5.28 5.30 5.36 5.46 5.67
+    DEPRECATION_VERSIONS 5.6 5.19 5.28 5.30 5.36 5.46 5.67 5.77
 )
 # TODO: add support for EXCLUDE_DEPRECATED_BEFORE_AND_AT to all Plasma libs
 # needs fixing of undeprecated API being still implemented using own deprecated API
 
 if(HAVE_X11)
     set(PLASMA_EXTRA_LIBS ${PLASMA_EXTRA_LIBS} Qt5::X11Extras ${X11_LIBRARIES} XCB::XCB)
-endif()
-
-if(DL_LIBRARY)
-    set(PLASMA_EXTRA_LIBS ${PLASMA_EXTRA_LIBS} ${DL_LIBRARY})
 endif()
 
 target_link_libraries(KF5Plasma

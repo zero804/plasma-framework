@@ -32,7 +32,7 @@ T.TabButton {
         PlasmaCore.IconItem {
             id: icon
 
-            Layout.alignment: Qt.AlignCenter
+            Layout.alignment: control.display != T.AbstractButton.TextBesideIcon ? Qt.AlignCenter : Qt.AlignVCenter | Qt.AlignRight
 
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -49,14 +49,15 @@ T.TabButton {
             colorGroup: control.PlasmaCore.ColorScope.colorGroup
             visible: source.length > 0 && control.display !== T.AbstractButton.TextOnly
             source: control.icon ? (control.icon.name || control.icon.source) : ""
+            active: control.visualFocus
         }
         Label {
             id: label
-            Layout.fillWidth: true
+            Layout.alignment: control.display != T.AbstractButton.TextBesideIcon || icon.source.length === 0 ? Qt.AlignCenter : Qt.AlignVCenter | Qt.AlignLeft
             visible: text.length > 0 && control.display !== T.AbstractButton.IconOnly
             text: control.Kirigami.MnemonicData.richTextLabel
             font: control.font
-            color: PlasmaCore.ColorScope.textColor
+            color: control.visualFocus ? PlasmaCore.ColorScope.highlightColor : PlasmaCore.ColorScope.textColor
             opacity: enabled || control.highlighted || control.checked ? 1 : 0.4
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
