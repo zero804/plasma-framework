@@ -75,6 +75,8 @@ class ContainmentInterface : public AppletInterface
      */
     Q_PROPERTY(bool editMode READ isEditMode WRITE setEditMode NOTIFY editModeChanged)
 
+    Q_PROPERTY(Plasma::Types::ContainmentDisplayHints containmentDisplayHints READ containmentDisplayHints WRITE setContainmentDisplayHints NOTIFY containmentDisplayHintsChanged)
+
 public:
     ContainmentInterface(DeclarativeAppletScript *parent, const QVariantList &args = QVariantList());
 
@@ -94,6 +96,7 @@ public:
 
     Plasma::Types::ContainmentType containmentType() const;
     void setContainmentType(Plasma::Types::ContainmentType type);
+    void setContainmentDisplayHints(Plasma::Types::ContainmentDisplayHints hints);
 
     QString activity() const;
     QString activityName() const;
@@ -151,6 +154,7 @@ public:
     {
         return qobject_cast<ContainmentInterface *>(AppletQuickItem::qmlAttachedProperties(object));
     }
+
 
 protected:
     void init() override;

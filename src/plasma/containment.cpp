@@ -50,6 +50,10 @@ Containment::Containment(QObject *parent,
     setHasConfigurationInterface(true);
 }
 
+void Containment::veggeroDebug() {
+    qDebug() << "Arrivato correttamente al CONTAINMENT";
+}
+
 Containment::Containment(QObject *parent, const QVariantList &args)
     : Applet(parent, args),
       d(new ContainmentPrivate(this))
@@ -78,6 +82,12 @@ void Containment::init()
 {
     Applet::init();
     static_cast<Applet *>(this)->d->setupScripting();
+    qDebug() << "------------";
+    qDebug() << "------------";
+    qDebug() << "------------";
+    qDebug() << "------------";
+    connect(this, SIGNAL(containmentDisplayHintsChanged()), this, SLOT(veggeroDebug())); //DEBUG
+    emit containmentDisplayHintsChanged(d->containmentDisplayHints);
 
     if (d->type == Types::NoContainmentType) {
         //setContainmentType(Plasma::Types::DesktopContainment);
@@ -345,9 +355,21 @@ void Containment::setFormFactor(Types::FormFactor formFactor)
 
 void Containment::setContainmentDisplayHints(Types::ContainmentDisplayHints hints)
 {
-    if (d->containmentDisplayHints == hints) {
-        return;
-    }
+    qDebug() << "";
+    qDebug() << "";
+    qDebug() << "";
+    qDebug() << "La richiesta di cambiare hint è stata ricevuta";
+    qDebug() << "";
+    qDebug() << "";
+    //if (d->containmentDisplayHints == hints) {
+    //    return;
+    //}
+    qDebug() << "";
+    qDebug() << "";
+    qDebug() << "";
+    qDebug() << "E correttamente applicata";
+    qDebug() << "";
+    qDebug() << "";
 
     d->containmentDisplayHints = hints;
     emit containmentDisplayHintsChanged(hints);
