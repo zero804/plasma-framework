@@ -147,7 +147,7 @@ public:
     qreal backgroundIntensity;
     qreal backgroundSaturation;
     bool backgroundContrastEnabled;
-	bool adaptiveTransparencyEnabled;
+    bool adaptiveTransparencyEnabled;
     bool blurBehindEnabled;
 
     //Version number of Plasma the Theme has been designed for
