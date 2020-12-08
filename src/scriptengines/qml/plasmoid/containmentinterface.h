@@ -156,7 +156,6 @@ public:
         return qobject_cast<ContainmentInterface *>(AppletQuickItem::qmlAttachedProperties(object));
     }
 
-
 protected:
     void init() override;
     void mousePressEvent(QMouseEvent *event) override;
