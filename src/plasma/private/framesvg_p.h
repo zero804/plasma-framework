@@ -104,6 +104,12 @@ public:
     int fixedRightMargin;
     int fixedBottomMargin;
 
+    //margins, we only have the hint for insets
+    int insetTopMargin;
+    int insetLeftMargin;
+    int insetRightMargin;
+    int insetBottomMargin;
+
     qreal devicePixelRatio;
 
     //size of the svg where the size of the "center"

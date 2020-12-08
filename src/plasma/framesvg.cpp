@@ -218,42 +218,29 @@ qreal FrameSvg::marginSize(const Plasma::Types::MarginEdge edge) const
     }
 }
 
-qreal FrameSvg::shadowMarginSize(const Plasma::Types::MarginEdge edge) const
+qreal FrameSvg::insetSize(const Plasma::Types::MarginEdge edge) const
 {
+    if (!d->frame) {
+        return .0;
+    }
+
+    if (d->frame->noBorderPadding) {
+        return .0;
+    }
+
     switch (edge) {
-        case Plasma::Types::TopMargin: {
-            const QSize marginHint = this->elementSize(QStringLiteral("shadow-hint-top-margin"));
-            if (marginHint.isValid()) {
-                return marginHint.height();
-            } else {
-                return .0;
-            }
-        }
-        case Plasma::Types::LeftMargin: {
-            const QSize marginHint = this->elementSize(QStringLiteral("shadow-hint-left-margin"));
-            if (marginHint.isValid()) {
-                return marginHint.width();
-            } else {
-                return .0;
-            }
-        }
-        case Plasma::Types::RightMargin: {
-            const QSize marginHint = this->elementSize(QStringLiteral("shadow-hint-right-margin"));
-            if (marginHint.isValid()) {
-                return marginHint.width();
-            } else {
-                return .0;
-            }
-        }
-        //Plasma::BottomMargin
-        default: {
-            const QSize marginHint = this->elementSize(QStringLiteral("shadow-hint-bottom-margin"));
-            if (marginHint.isValid()) {
-                return marginHint.height();
-            } else {
-                return .0;
-            }
-        }
+    case Plasma::Types::TopMargin:
+        return d->frame->insetTopMargin;
+
+    case Plasma::Types::LeftMargin:
+        return d->frame->insetLeftMargin;
+
+    case Plasma::Types::RightMargin:
+        return d->frame->insetRightMargin;
+
+    //Plasma::BottomMargin
+    default:
+        return d->frame->insetBottomMargin;
     }
 }
 
@@ -307,6 +294,19 @@ void FrameSvg::getFixedMargins(qreal &left, qreal &top, qreal &right, qreal &bot
     left = d->frame->fixedLeftMargin;
     right = d->frame->fixedRightMargin;
     bottom = d->frame->fixedBottomMargin;
+}
+
+void FrameSvg::getInset(qreal &left, qreal &top, qreal &right, qreal &bottom) const
+{
+    if (!d->frame || d->frame->noBorderPadding) {
+        left = top = right = bottom = 0;
+        return;
+    }
+
+    top = d->frame->insetTopMargin;
+    left = d->frame->insetLeftMargin;
+    right = d->frame->insetRightMargin;
+    bottom = d->frame->insetBottomMargin;
 }
 
 QRectF FrameSvg::contentsRect() const
@@ -810,6 +810,12 @@ void FrameSvgPrivate::updateSizes(FrameData *frame) const
         frame->topMargin = frame->topHeight = 0;
     }
 
+    if (q->hasElement(frame->prefix % QLatin1String("hint-top-inset"))) {
+        frame->insetTopMargin = q->elementSize(frame->prefix % QLatin1String("hint-top-inset")).height();
+    } else {
+        frame->insetTopMargin = -1;
+    }
+
     frame->fixedLeftWidth = q->elementSize(frame->prefix % QLatin1String("left")).width();
 
     if (q->hasElement(frame->prefix % QLatin1String("hint-left-margin"))) {
@@ -823,6 +829,12 @@ void FrameSvgPrivate::updateSizes(FrameData *frame) const
         frame->leftWidth = frame->fixedLeftWidth;
     } else {
         frame->leftMargin = frame->leftWidth = 0;
+    }
+
+    if (q->hasElement(frame->prefix % QLatin1String("hint-left-inset"))) {
+        frame->insetLeftMargin = q->elementSize(frame->prefix % QLatin1String("hint-left-inset")).width();
+    } else {
+        frame->insetLeftMargin = -1;
     }
 
     frame->fixedRightWidth = q->elementSize(frame->prefix % QLatin1String("right")).width();
@@ -840,6 +852,12 @@ void FrameSvgPrivate::updateSizes(FrameData *frame) const
         frame->rightMargin = frame->rightWidth = 0;
     }
 
+    if (q->hasElement(frame->prefix % QLatin1String("hint-right-inset"))) {
+        frame->insetRightMargin = q->elementSize(frame->prefix % QLatin1String("hint-right-inset")).width();
+    } else {
+        frame->insetRightMargin = -1;
+    }
+
     frame->fixedBottomHeight = q->elementSize(frame->prefix % QLatin1String("bottom")).height();
 
     if (q->hasElement(frame->prefix % QLatin1String("hint-bottom-margin"))) {
@@ -853,6 +871,12 @@ void FrameSvgPrivate::updateSizes(FrameData *frame) const
         frame->bottomHeight = frame->fixedBottomHeight;
     } else {
         frame->bottomMargin = frame->bottomHeight = 0;
+    }
+
+    if (q->hasElement(frame->prefix % QLatin1String("hint-bottom-inset"))) {
+        frame->insetBottomMargin = q->elementSize(frame->prefix % QLatin1String("hint-bottom-inset")).height();
+    } else {
+        frame->insetBottomMargin = -1;
     }
 
     frame->composeOverBorder = (q->hasElement(frame->prefix % QLatin1String("hint-compose-over-border")) &&

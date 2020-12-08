@@ -1087,6 +1087,11 @@ QObject *Dialog::margins() const
     return d->frameSvgItem->fixedMargins();
 }
 
+QObject *Dialog::inset() const
+{
+    return d->frameSvgItem->inset();
+}
+
 void Dialog::setFramelessFlags(Qt::WindowFlags flags)
 {
     if (d->type == Dialog::Normal)

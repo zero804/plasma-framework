@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.12
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import QtQuick.Templates 2.12 as T
+import "private" as Private
 
  /**
   * Item to be used as a header or footer in plasmoids
@@ -39,16 +40,18 @@ import QtQuick.Templates 2.12 as T
     property int location: PlasmoidHeading.Location.Header
 
     Layout.fillWidth: true
-    bottomPadding: location == PlasmoidHeading.Location.Footer ? 0 : headingSvg.fixedMargins.top
-    topPadding: location == PlasmoidHeading.Location.Footer ? headingSvg.fixedMargins.bottom : 0
+    bottomPadding: location == PlasmoidHeading.Location.Footer ? 0 : -backgroundMetrics.getMargin("bottom")
+    topPadding: location == PlasmoidHeading.Location.Footer ? -backgroundMetrics.getMargin("top") : 0
+    leftPadding: -backgroundMetrics.getMargin("left")
+    rightPadding: -backgroundMetrics.getMargin("right")
 
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
 
-    leftInset: -headingSvg.fixedMargins.left
-    rightInset: -headingSvg.fixedMargins.right
-    topInset: location == PlasmoidHeading.Location.Footer ? 0 : -headingSvg.fixedMargins.top
-    bottomInset: location == PlasmoidHeading.Location.Footer ? -headingSvg.fixedMargins.bottom : 0
+    leftInset: backgroundMetrics.getMargin("left")
+    rightInset: backgroundMetrics.getMargin("right")
+    topInset: location == PlasmoidHeading.Location.Footer ? 0 : backgroundMetrics.getMargin("top")
+    bottomInset: location == PlasmoidHeading.Location.Footer ? backgroundMetrics.getMargin("bottom") : 0
 
     PlasmaCore.ColorScope.colorGroup: location == PlasmoidHeading.Location.Header ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.WindowColorGroup
     PlasmaCore.ColorScope.inherit: false
@@ -73,6 +76,16 @@ import QtQuick.Templates 2.12 as T
                 borders |= PlasmaCore.FrameSvg.BottomBorder
             }
             return borders
+        }
+        Private.BackgroundMetrics {
+            id: backgroundMetrics
+            function getMargin(margin) {
+                if (!hasInset) {
+                    return -headingSvg.fixedMargins[margin];
+                } else {
+                    return -backgroundMetrics.fixedMargins[margin] + backgroundMetrics.inset[margin]
+                }
+            }
         }
     }
  }

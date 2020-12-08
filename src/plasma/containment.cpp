@@ -429,6 +429,7 @@ void Containment::addApplet(Applet *applet)
         emit currentContainment->appletRemoved(applet);
 
         disconnect(applet, nullptr, currentContainment, nullptr);
+        connect(currentContainment, nullptr, applet, nullptr);
         KConfigGroup oldConfig = applet->config();
         currentContainment->d->applets.removeAll(applet);
         applet->setParent(this);
@@ -471,6 +472,7 @@ void Containment::addApplet(Applet *applet)
     connect(applet, SIGNAL(appletDeleted(Plasma::Applet*)), this, SLOT(appletDeleted(Plasma::Applet*)));
     connect(applet, SIGNAL(statusChanged(Plasma::Types::ItemStatus)), this, SLOT(checkStatus(Plasma::Types::ItemStatus)));
     connect(applet, &Applet::activated, this, &Applet::activated);
+    connect(this, &Containment::containmentDisplayHintsChanged, applet, &Applet::containmentDisplayHintsChanged);
 
     if (!currentContainment) {
         const bool isNew = applet->d->mainConfigGroup()->entryMap().isEmpty();

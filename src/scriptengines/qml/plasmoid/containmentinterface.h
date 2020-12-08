@@ -103,6 +103,8 @@ public:
 
     QList<QObject *> actions() const;
 
+    void setContainmentDisplayHints(Plasma::Types::ContainmentDisplayHints hints);
+
     /**
      * Process the mime data arrived to a particular coordinate, either with a drag and drop or paste with middle mouse button
      */

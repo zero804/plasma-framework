@@ -433,7 +433,7 @@ void ContainmentInterface::processMimeData(QMimeData *mimeData, int x, int y, KI
         }
         return;
     }
-    m_dropMenu = QPointer<DropMenu>(new DropMenu(dropJob, QPoint(x, y), this));
+    m_dropMenu = QPointer<DropMenu>(new DropMenu(dropJob, mapToGlobal(QPoint(x, y)).toPoint(), this));
     if (dropJob) {
         dropJob->setParent(m_dropMenu);
     }
@@ -876,6 +876,12 @@ QList<QObject *> ContainmentInterface::actions() const
 
     return actionList;
 }
+
+void ContainmentInterface::setContainmentDisplayHints(Plasma::Types::ContainmentDisplayHints hints)
+{
+    m_containment->setContainmentDisplayHints(hints);
+}
+
 
 //PROTECTED--------------------
 
