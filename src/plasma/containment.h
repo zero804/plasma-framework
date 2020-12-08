@@ -300,7 +300,6 @@ public Q_SLOTS:
     void setContainmentType(Plasma::Types::ContainmentType type);
 
     void reactToScreenChange();
-    void veggeroDebug(); //DEBUG
 
 protected:
     /**

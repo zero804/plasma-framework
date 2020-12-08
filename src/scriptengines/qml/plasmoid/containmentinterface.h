@@ -96,7 +96,6 @@ public:
 
     Plasma::Types::ContainmentType containmentType() const;
     void setContainmentType(Plasma::Types::ContainmentType type);
-    void setContainmentDisplayHints(Plasma::Types::ContainmentDisplayHints hints);
 
     QString activity() const;
     QString activityName() const;

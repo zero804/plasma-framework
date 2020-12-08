@@ -173,11 +173,6 @@ void ContainmentInterface::setContainmentType(Plasma::Types::ContainmentType typ
     appletScript()->setContainmentType(type);
 }
 
-void ContainmentInterface::setContainmentDisplayHints(Plasma::Types::ContainmentDisplayHints type)
-{
-    m_containment->setContainmentDisplayHints(type);
-}
-
 Plasma::Applet *ContainmentInterface::createApplet(const QString &plugin, const QVariantList &args, const QPoint &pos)
 {
     return createApplet(plugin, args, QRectF(pos, QSize()));
