@@ -173,20 +173,20 @@
     <g id="layer1" transform="translate(0,-904.36218)">
         <rect id="hint-tile-center" y="904.36218" width="5" height="5" fill="#f60"/>
         <g id="top" transform="translate(-1.0000017,-2.280249e-5)">
-            <rect id="rect4152" class="ColorScheme-Background" transform="matrix(0,-1,-1,0,0,0)" x="-916.36218" y="-50.999985" width="6" height="32" fill="currentColor" opacity=".75"/>
+            <rect id="rect4152" class="ColorScheme-Background" transform="matrix(0,-1,-1,0,0,0)" x="-916.36218" y="-50.999985" width="6" height="32" fill="currentColor" opacity=".85"/>
         </g>
         <g id="bottom" transform="translate(-1.0000017,-2.280249e-5)">
-            <rect id="rect4148" class="ColorScheme-Background" transform="rotate(90)" x="948.36218" y="-50.999985" width="6" height="32" fill="currentColor" opacity=".75"/>
+            <rect id="rect4148" class="ColorScheme-Background" transform="rotate(90)" x="948.36218" y="-50.999985" width="6" height="32" fill="currentColor" opacity=".85"/>
         </g>
         <g id="left" transform="translate(-1.0000017,-2.280249e-5)">
-            <rect id="rect4144" class="ColorScheme-Background" transform="scale(-1,1)" x="-19.000004" y="916.36218" width="5.9999995" height="32" fill="currentColor" opacity=".75"/>
+            <rect id="rect4144" class="ColorScheme-Background" transform="scale(-1,1)" x="-19.000004" y="916.36218" width="5.9999995" height="32" fill="currentColor" opacity=".85"/>
         </g>
         <g id="right" transform="translate(-1.0000017,-2.280249e-5)">
-            <rect id="rect4140" class="ColorScheme-Background" x="50.999985" y="916.36218" width="5.9999995" height="32" fill="currentColor" opacity=".75"/>
+            <rect id="rect4140" class="ColorScheme-Background" x="50.999985" y="916.36218" width="5.9999995" height="32" fill="currentColor" opacity=".85"/>
         </g>
         <g id="center" transform="translate(-1.0000017,-2.280249e-5)">
             <rect id="rect4401" x="19.000004" y="916.36218" width="32" height="32" fill="none"/>
-            <rect id="rect4138" class="ColorScheme-Background" x="19.000004" y="916.36218" width="32" height="32" fill="currentColor" opacity=".75"/>
+            <rect id="rect4138" class="ColorScheme-Background" x="19.000004" y="916.36218" width="32" height="32" fill="currentColor" opacity=".85"/>
         </g>
         <g id="shadow-top" transform="translate(55.999978,-2.8024903e-6)">
             <rect id="rect4820" transform="matrix(0,-1,-1,0,0,0)" x="-916.36218" y="-50.999985" width="6" height="32" fill="none"/>
@@ -262,16 +262,16 @@
         <path id="mask-topleft" class="ColorScheme-Background" d="m131.00016 910.61202v8.25016h-8.25016v-4.12508c0-2.75005 1.37503-4.12508 4.12508-4.12508h2.75005z"/>
         <path id="mask-topright" class="ColorScheme-Background" d="m158.49998 910.61202v8.25016h8.25016v-4.12508c0-2.75005-1.37503-4.12508-4.12508-4.12508h-2.75005z"/>
         <g id="topleft" transform="translate(-1.0000017,-4.280249e-5)">
-            <path id="rect4159" class="ColorScheme-Background" transform="translate(0,904.36218)" d="m16 6c-2 0-3 1-3 3v3h6v-6h-1 1z" fill="currentColor" opacity=".75"/>
+            <path id="rect4159" class="ColorScheme-Background" transform="translate(0,904.36218)" d="m16 6c-2 0-3 1-3 3v3h6v-6h-1 1z" fill="currentColor" opacity=".85"/>
         </g>
         <g id="topright" transform="translate(-1.0000017,-4.280249e-5)">
-            <path id="rect4177" class="ColorScheme-Background" transform="translate(0,904.36218)" d="m51 6v6h6v-3c0-2-1-3-3-3h-2z" fill="currentColor" opacity=".75"/>
+            <path id="rect4177" class="ColorScheme-Background" transform="translate(0,904.36218)" d="m51 6v6h6v-3c0-2-1-3-3-3h-2z" fill="currentColor" opacity=".85"/>
         </g>
         <g id="bottomleft" transform="translate(-1.0000017,-4.280249e-5)">
-            <path id="path5048" class="ColorScheme-Background" d="m19 954.36218v-6h-6v3c0 2 1 3 3 3h2z" fill="currentColor" opacity=".75"/>
+            <path id="path5048" class="ColorScheme-Background" d="m19 954.36218v-6h-6v3c0 2 1 3 3 3h2z" fill="currentColor" opacity=".85"/>
         </g>
         <g id="bottomright" transform="translate(-1.0000017,-4.280249e-5)">
-            <path id="rect4177-6" class="ColorScheme-Background" d="m51 954.36218v-6h6v3c0 2-1 3-3 3h-2z" fill="currentColor" opacity=".75"/>
+            <path id="rect4177-6" class="ColorScheme-Background" d="m51 954.36218v-6h6v3c0 2-1 3-3 3h-2z" fill="currentColor" opacity=".85"/>
         </g>
         <rect style="fill:#00ff00;fill-opacity:1;stroke:none" id="hint-top-inset" width="4" height="0.000001" x="33" y="904.36218"/>
         <rect y="954.36218" x="33" height="0.000001" width="4" id="hint-bottom-inset" style="fill:#00ff00;fill-opacity:1;stroke:none"/>
@@ -299,7 +299,7 @@
          width="6"
          height="32"
          fill="currentColor"
-         opacity=".75"
+         opacity=".85"
          style="opacity:0.85" />
     </g>
     <g
@@ -314,7 +314,7 @@
          width="5.9999995"
          height="32"
          fill="currentColor"
-         opacity=".75"
+         opacity=".85"
          style="opacity:0.85" />
     </g>
     <g
@@ -328,7 +328,7 @@
          width="5.9999995"
          height="32"
          fill="currentColor"
-         opacity=".75"
+         opacity=".85"
          style="opacity:0.85" />
     </g>
     <g
@@ -349,7 +349,7 @@
          width="32"
          height="32"
          fill="currentColor"
-         opacity=".75"
+         opacity=".85"
          style="opacity:0.85" />
     </g>
     <g
@@ -776,7 +776,7 @@
          transform="translate(0,904.36218)"
          d="m16 6c-2 0-3 1-3 3v3h6v-6h-1 1z"
          fill="currentColor"
-         opacity=".75"
+         opacity=".85"
          style="opacity:0.85" />
     </g>
     <g
@@ -788,7 +788,7 @@
          transform="translate(0,904.36218)"
          d="m51 6v6h6v-3c0-2-1-3-3-3h-2z"
          fill="currentColor"
-         opacity=".75"
+         opacity=".85"
          style="opacity:0.85" />
     </g>
     <g
@@ -799,7 +799,7 @@
          class="ColorScheme-Background"
          d="m19 954.36218v-6h-6v3c0 2 1 3 3 3h2z"
          fill="currentColor"
-         opacity=".75"
+         opacity=".85"
          style="opacity:0.85" />
     </g>
     <g
@@ -810,7 +810,7 @@
          class="ColorScheme-Background"
          d="m51 954.36218v-6h6v3c0 2-1 3-3 3h-2z"
          fill="currentColor"
-         opacity=".75"
+         opacity=".85"
          style="opacity:0.85" />
     </g>
     <rect
