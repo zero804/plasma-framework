@@ -79,7 +79,6 @@ public Q_SLOTS:
     void onAppExitCleanup();
     void notifyOfChanged();
     void settingsChanged(bool emitChanges);
-    void saveSvgElementsCache();
 
 Q_SIGNALS:
     void themeChanged();
@@ -117,9 +116,7 @@ public:
     int defaultWallpaperWidth;
     int defaultWallpaperHeight;
     KImageCache *pixmapCache;
-    KSharedConfigPtr svgElementsCache;
     QString cachedDefaultStyleSheet;
-    QHash<QString, QSet<QString> > invalidElements;
     QHash<QString, QPixmap> pixmapsToCache;
     QHash<QString, QString> keysToCache;
     QHash<QString, QString> idsToCache;
@@ -127,7 +124,6 @@ public:
     QHash<Theme::ColorGroup, QString> cachedSelectedSvgStyleSheets;
     QHash<QString, QString> discoveries;
     QTimer *pixmapSaveTimer;
-    QTimer *rectSaveTimer;
     QTimer *updateNotificationTimer;
     unsigned cacheSize;
     CacheTypes cachesToDiscard;

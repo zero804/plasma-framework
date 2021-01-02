@@ -28,11 +28,7 @@ Calendar::Calendar(QObject *parent)
 
 QDateTime Calendar::displayedDate() const
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return m_displayedDate.startOfDay();
-#else
-    return QDateTime(m_displayedDate);
-#endif
 }
 
 void Calendar::setDisplayedDate(const QDate &dateTime)
@@ -65,11 +61,7 @@ void Calendar::setDisplayedDate(const QDateTime &dateTime)
 
 QDateTime Calendar::today() const
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return m_today.startOfDay();
-#else
-    return QDateTime(m_today);
-#endif
 }
 
 void Calendar::setToday(const QDateTime &dateTime)
@@ -322,7 +314,10 @@ void Calendar::nextDecade()
 
 void Calendar::previousDecade()
 {
-    setDisplayedDate(m_displayedDate.addYears(-10));
+    // Negative years don't make sense
+    if (m_displayedDate.year() >= 10) {
+        setDisplayedDate(m_displayedDate.addYears(-10));
+    }
 }
 
 void Calendar::nextYear()
@@ -332,7 +327,10 @@ void Calendar::nextYear()
 
 void Calendar::previousYear()
 {
-    setDisplayedDate(m_displayedDate.addYears(-1));
+    // Negative years don't make sense
+    if (m_displayedDate.year() >= 1) {
+        setDisplayedDate(m_displayedDate.addYears(-1));
+    }
 }
 
 void Calendar::nextMonth()
